@@ -4,14 +4,17 @@ FROM python:3.9
 # Establece el directorio de trabajo en la imagen
 WORKDIR /app
 
-# Copia el contenido actual del directorio al contenedor
-COPY . .
+# Copia solo los archivos necesarios para la instalación de dependencias
+COPY requirements.txt .
 
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copia el contenido actual del directorio al contenedor
+COPY . .
+
 # Expone el puerto 5000 para que pueda ser accesible desde el exterior
 EXPOSE 5000
 
-# Comando para ejecutar la aplicación Flask
+#Comando para ejecutar la aplicación Flask
 CMD ["python", "main.py"]
